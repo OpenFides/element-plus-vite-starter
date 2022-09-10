@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import BaseHeader from './components/layouts/BaseHeader.vue'
+import BaseSide from './components/layouts/BaseSide.vue'
+</script>
 <template>
   <el-config-provider namespace="ep">
     <BaseHeader />
@@ -5,7 +10,7 @@
       <BaseSide />
       <div>
         <img alt="Vue logo" class="element-plus-logo" src="./assets/logo.png" />
-        <HelloWorld msg="Hello Vue 3.0 + Element Plus + Vite" />
+ 		 <RouterView />
       </div>
     </div>
   </el-config-provider>
