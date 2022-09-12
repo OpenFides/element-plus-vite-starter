@@ -17,6 +17,10 @@ a {
   color: var(--ep-color-primary);
 }
 
+.ep-header {
+  --ep-header-padding: 0px;
+}
+
 code {
   border-radius: 2px;
   padding: 2px 4px;

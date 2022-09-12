@@ -19,6 +19,7 @@ const configTab = ref('widget')
   <el-container>
     <el-aside width="266px">
       <!-- 左侧 -->
+      <ComponentGroup title="布局" :list="element.layoutComponents"></ComponentGroup>
       <ComponentGroup title="基础字段" :list="element.basicComponents"></ComponentGroup>
       <ComponentGroup title="扩展字段" :list="element.advanceComponents"></ComponentGroup>
     </el-aside>
@@ -30,16 +31,22 @@ const configTab = ref('widget')
       <!-- {{widgetFormCurrentSelect}}  -->
       <el-container>
         <el-header>
-          <div :class="{ active: configTab === 'widget' }" @click="configTab = 'widget'">
-            字段属性
-          </div>
-          <div :class="{ active: configTab === 'form' }" @click="configTab = 'form'">
-            表单属性
-          </div>
+
+
+          <el-tabs v-model="configTab" type="card">
+            <el-tab-pane label="字段属性" name="字段属性">
+              <ElWidgetConfig v-model:select="widgetFormCurrentSelect" />
+            </el-tab-pane>
+            <el-tab-pane label="表单属性" name="表单属性">
+              <ElFormConfig v-model:config="widgetForm.config" />
+            </el-tab-pane>
+            <el-tab-pane label="布局" name="布局">todo</el-tab-pane>
+          </el-tabs>
+
         </el-header>
         <el-main>
-          <ElWidgetConfig v-show="configTab === 'widget'" v-model:select="widgetFormCurrentSelect" />
-          <ElFormConfig v-show="configTab === 'form'" v-model:config="widgetForm.config" />
+
+
         </el-main>
       </el-container>
     </el-aside>

@@ -28,7 +28,7 @@
       <el-icon><icon-menu /></el-icon>
       <template #title>Navigator Two</template>
     </el-menu-item>
-    <el-menu-item index="3" disabled>
+    <el-menu-item index="3">
       <el-icon><document /></el-icon>
       <template #title>Navigator Three</template>
     </el-menu-item>

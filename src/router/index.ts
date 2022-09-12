@@ -30,53 +30,23 @@ const router = createRouter({
       meta: { title: '用户登录', viewport: viewport },
     },
     {
-      path: '/workplace',
-      name: 'WorkPlace',
+      path: '/work',
+      name: 'Work',
       component: WorkPlace,
       meta: { title: '工作区', viewport: viewport },
-    }, 
-    {
-      path: '/form',
+
+    }, {
+      path: '/work/form',
       name: 'Form',
       component: FormView,
       meta: { title: '表单设计', viewport: viewport },
     },
-    /*  {
-        path: '/admin/design',
-        name: 'design',
-        component: Vue.defineAsyncComponent(
-          () => import('@/views/admin/FormProcessDesign.vue')
-        ),
-        meta: { title: '表单流程设计', viewport: viewport },
-        children: [
-          {
-            path: "baseSetting",
-            name: "baseSetting",
-            component: () => import("@/views/admin/layout/FormBaseSetting.vue"),
-            meta: { title: '基础设置' }
-          }, {
-            path: "formSetting",
-            name: "formSetting",
-            component: () => import("@/views/admin/layout/FormDesign.vue"),
-            meta: { title: '表单设计' }
-          }, {
-            path: "processDesign",
-            name: "processDesign",
-            component: () => import("@/views/admin/layout/ProcessDesign.vue"),
-            meta: { title: '流程设计' }
-          }, {
-            path: "proSetting",
-            name: "proSetting",
-            component: () => import("@/views/admin/layout/FormProSetting.vue"),
-            meta: { title: '高级设置' }
-          }
-        ]
-      },*/
+
   ],
 })
 
 router.beforeEach((to, from, next) => {
- 
+
   if (to.meta.title) {
     document.title = to.meta.title
   }

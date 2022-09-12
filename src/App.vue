@@ -8,24 +8,22 @@ const locale = zhCn
 </script>
 <template>
   <el-config-provider namespace="ep" :locale="locale">
-    <div class="common-layout">
+    <el-container>
+      <el-header>
+        <BaseHeader />
+      </el-header>
       <el-container>
-        <el-header>
-          <BaseHeader />
-        </el-header>
+        <el-aside>
+          <BaseSide />
+        </el-aside>
         <el-container>
-          <el-aside >
-            <BaseSide />
-          </el-aside>
-          <el-container>
-            <el-main>
-              <RouterView />
-            </el-main>
-            <el-footer>Footer</el-footer>
-          </el-container>
+          <el-main>
+            <RouterView />
+          </el-main>
+          <el-footer>@</el-footer>
         </el-container>
       </el-container>
-    </div>
+    </el-container>
   </el-config-provider>
 </template>
 
