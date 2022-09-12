@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import AboutView from '@/views/AboutView.vue'
 import LoginView from '@/views/login/Index.vue'
 import WorkPlace from '@/views/WorkSpace.vue'
+import FormView from '~/views/FormView.vue'
 import { pa } from 'element-plus/es/locale'
 const viewport = {
   content: 'width=device-width, initial-scale=1.0, user-scalable=no',
@@ -33,14 +34,14 @@ const router = createRouter({
       name: 'WorkPlace',
       component: WorkPlace,
       meta: { title: '工作区', viewport: viewport },
-    }, /*
+    }, 
     {
-      path: '/forms',
-      name: 'formsPanel',
-      component: FormsPanel,
-      meta: { title: '表单列表', viewport: viewport },
+      path: '/form',
+      name: 'Form',
+      component: FormView,
+      meta: { title: '表单设计', viewport: viewport },
     },
-      {
+    /*  {
         path: '/admin/design',
         name: 'design',
         component: Vue.defineAsyncComponent(

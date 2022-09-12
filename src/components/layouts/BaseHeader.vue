@@ -18,7 +18,7 @@ import zhCn from 'element-plus/lib/locale/lang/zh-cn'
     <el-sub-menu index="2">
       <template #title>Workspace</template>
       <el-menu-item index="2-1">
-        <router-link to="/forms">Form</router-link>
+        <router-link to="/form">Form</router-link>
       </el-menu-item>
       <el-menu-item index="2-2">
         <router-link to="/flow/work">Work flow</router-link>

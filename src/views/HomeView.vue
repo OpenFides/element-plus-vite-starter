@@ -1,17 +1,6 @@
 <script setup lang="ts">
-import { ElDesignForm } from "@/components/form";
+import TheWelcome from "@/components/TheWelcome.vue";
 </script>
 <template>
-  <ElDesignForm ref="designForm" />
+  <TheWelcome />
 </template>
-
-<style>
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-</style>
