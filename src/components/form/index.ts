@@ -1,12 +1,12 @@
 import { App } from 'vue'
-import ElDesignForm from './core/elementPlus/ElDesignForm.vue'
+import FormDesign from './core/FormDesign.vue'
 
-ElDesignForm.install = (app: App) => {
-    app.component(ElDesignForm.name, ElDesignForm)
+FormDesign.install = (app: App) => {
+    app.component(FormDesign.name, FormDesign)
 }
 
 const components = [
-    ElDesignForm,
+    FormDesign,
 ]
 
 const install = (app: App) => {
@@ -15,10 +15,10 @@ const install = (app: App) => {
 
 export {
     install,
-    ElDesignForm
+    FormDesign
 }
 
 export default {
     install,
-    ElDesignForm
+    FormDesign
 }
