@@ -1,7 +1,7 @@
-import request from '@/api/request.ts'
+import request from '~/api/request'
 
 // 查询组织架构树
-export function getOrgTree(param) {
+export function getOrgTree(param: any) {
   return request({
     url: 'oa/org/tree',
     method: 'get',
@@ -18,7 +18,7 @@ export function getRole() {
 }
 
 // 搜索人员
-export function getUserByName(param) {
+export function getUserByName(param: any) {
   return request({
     url: 'oa/org/tree/user/search',
     method: 'get',

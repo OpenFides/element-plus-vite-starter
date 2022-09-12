@@ -1,183 +1,90 @@
 <template>
   <div class="from-panel" ref="panel">
     <div class="from-title">
-      <el-button
-        :icon="ElIconBack"
-        type="info"
-        size="mini"
-        circle
-        plain
-        style="margin-right: 15px"
-        @click="$router.push('/')"
-      ></el-button>
+      <el-button :icon="ElIconBack" type="info" size="mini" circle plain style="margin-right: 15px"
+        @click="$router.push('/')"></el-button>
       <span>流程面板</span>
-      <span style="color: #c75450; margin-left: 20px"
-        >📢
-        大家要体验的话，尽量使用已有的分组和流程进行编辑，不要随意新建，数据有点乱哈，谢谢了❤</span
-      >
+      <span style="color: #c75450; margin-left: 20px">📢
+        大家要体验的话，尽量使用已有的分组和流程进行编辑，不要随意新建，数据有点乱哈，谢谢了❤</span>
       <div>
-        <el-button
-          type="primary"
-          :icon="ElIconPlus"
-          size="mini"
-          @click="newProcess"
-          >新建表单</el-button
-        >
-        <el-button :icon="ElIconPlus" @click="addGroup" size="mini"
-          >新建分组</el-button
-        >
+        <el-button type="primary" :icon="ElIconPlus" size="mini" @click="newProcess">新建表单</el-button>
+        <el-button :icon="ElIconPlus" @click="addGroup" size="mini">新建分组</el-button>
       </div>
     </div>
-    <draggable
-      :list="groups"
-      group="group"
-      handle=".el-icon-rank"
-      filter=".undrag"
-      @start="groupsSort = true"
-      :options="{
-        animation: 300,
-        sort: true,
-        scroll: true,
-        chosenClass: 'choose',
-      }"
-      @end="groupSort"
-    >
-      <div
-        :class="{
-          'form-group': true,
-          undrag: group.id === 0 || group.id === undefined,
-        }"
-        v-show="group.id > 1 || group.items.length > 0"
-        v-for="(group, gidx) in groups"
-        :key="gidx"
-      >
+    <draggable :list="groups" group="group" handle=".el-icon-rank" filter=".undrag" @start="groupsSort = true" :options="{
+      animation: 300,
+      sort: true,
+      scroll: true,
+      chosenClass: 'choose',
+    }" @end="groupSort">
+      <div :class="{
+        'form-group': true,
+        undrag: group.id === 0 || group.id === undefined,
+      }" v-show="group.id > 1 || group.items.length > 0" v-for="(group, gidx) in groups" :key="gidx">
         <div class="form-group-title">
           <span>{{ group.name }}</span>
           <span>({{ group.items.length }})</span>
-          <el-icon><el-icon-rank /></el-icon>
+          <el-icon>
+            <el-icon-rank />
+          </el-icon>
           <div v-if="!(group.id === 0 || group.id === undefined)">
             <el-dropdown>
               <el-button type="text" :icon="ElIconSetting">编辑分组</el-button>
               <template v-slot:dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item
-                    :icon="ElIconEditOutline"
-                    @click="editGroup(group)"
-                    >修改名称</el-dropdown-item
-                  >
-                  <el-dropdown-item
-                    :icon="ElIconDelete"
-                    @click="delGroup(group)"
-                    >删除分组</el-dropdown-item
-                  >
+                  <el-dropdown-item :icon="ElIconEditOutline" @click="editGroup(group)">修改名称</el-dropdown-item>
+                  <el-dropdown-item :icon="ElIconDelete" @click="delGroup(group)">删除分组</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
           </div>
         </div>
-        <draggable
-          style="width: 100%; min-height: 25px"
-          :list="group.items"
-          group="from"
-          @end="groupSort"
-          v-show="!groupsSort"
-          filter=".undrag"
-          :options="{
+        <draggable style="width: 100%; min-height: 25px" :list="group.items" group="from" @end="groupSort"
+          v-show="!groupsSort" filter=".undrag" :options="{
             animation: 300,
             delay: 200,
             chosenClass: 'choose',
             scroll: true,
             sort: true,
-          }"
-        >
-          <div
-            :class="{ 'form-group-item': true, undrag: item.isStop }"
-            v-for="(item, index) in group.items"
-            :key="index"
-            title="长按0.5S后可拖拽表单进行排序"
-          >
+          }">
+          <div :class="{ 'form-group-item': true, undrag: item.isStop }" v-for="(item, index) in group.items"
+            :key="index" title="长按0.5S后可拖拽表单进行排序">
             <div>
-              <i
-                :class="item.logo.icon"
-                :style="'background: ' + item.logo.background"
-              ></i>
-              <span>{{ item.formName }}</span
-              ><br />
+              <i :class="item.logo.icon" :style="'background: ' + item.logo.background"></i>
+              <span>{{ item.formName }}</span><br />
             </div>
             <div class="desp">{{ item.remark }}</div>
             <div>
               <span>最后更新时间：{{ item.updated }}</span>
             </div>
             <div>
-              <el-button
-                type="text"
-                :icon="ElIconEditOutline"
-                size="mini"
-                @click="editFrom(item, group)"
-                >编辑</el-button
-              >
-              <el-button
-                type="text"
-                :icon="item.isStop ? 'el-icon-check' : 'el-icon-close'"
-                size="mini"
-                @click="stopFrom(item)"
-              >
+              <el-button type="text" :icon="ElIconEditOutline" size="mini" @click="editFrom(item, group)">编辑</el-button>
+              <el-button type="text" :icon="item.isStop ? 'el-icon-check' : 'el-icon-close'" size="mini"
+                @click="stopFrom(item)">
                 {{ item.isStop ? '启用' : '停用' }}
               </el-button>
 
-              <el-button
-                type="text"
-                :icon="ElIconDelete"
-                size="mini"
-                @click="moveFrom(item)"
-                v-if="item.isStop"
-                >删除
+              <el-button type="text" :icon="ElIconDelete" size="mini" @click="moveFrom(item)" v-if="item.isStop">删除
               </el-button>
-              <el-popover
-                placement="left"
-                trigger="click"
-                width="400"
-                style="margin-left: 10px"
-                @show="moveSelect === null"
-                v-else
-              >
+              <el-popover placement="left" trigger="click" width="400" style="margin-left: 10px"
+                @show="moveSelect === null" v-else>
                 <el-radio-group v-model="moveSelect" size="mini">
-                  <el-radio
-                    :label="g.id"
-                    border
-                    v-for="g in groups"
-                    :key="g.id"
-                    v-show="g.id > 1"
-                    :disabled="g.id === group.id"
-                    style="margin: 10px"
-                    >{{ g.name }}</el-radio
-                  >
+                  <el-radio :label="g.id" border v-for="g in groups" :key="g.id" v-show="g.id > 1"
+                    :disabled="g.id === group.id" style="margin: 10px">{{ g.name }}</el-radio>
                 </el-radio-group>
                 <div style="text-align: right; margin: 0">
-                  <el-button type="primary" size="mini" @click="moveFrom(item)"
-                    >提交</el-button
-                  >
+                  <el-button type="primary" size="mini" @click="moveFrom(item)">提交</el-button>
                 </div>
                 <template v-slot:reference>
-                  <el-button type="text" :icon="ElIconSPromotion" size="mini"
-                    >移动</el-button
-                  >
+                  <el-button type="text" :icon="ElIconSPromotion" size="mini">移动</el-button>
                 </template>
               </el-popover>
             </div>
           </div>
         </draggable>
-        <div
-          style="text-align: center"
-          v-if="group.items === undefined || group.items.length === 0"
-        >
-          <el-button
-            style="padding-top: 0"
-            type="text"
-            :icon="ElIconPlus"
-            @click="newProcess(group.id)"
-            >创建新表单</el-button
-          >
+        <div style="text-align: center" v-if="group.items === undefined || group.items.length === 0">
+          <el-button style="padding-top: 0" type="text" :icon="ElIconPlus" @click="newProcess(group.id)">创建新表单
+          </el-button>
         </div>
       </div>
     </draggable>
@@ -185,15 +92,15 @@
 </template>
 
 <script>
-import {
-  Rank as ElIconRank,
-  Back as ElIconBack,
-  Plus as ElIconPlus,
-  Setting as ElIconSetting,
-  EditOutline as ElIconEditOutline,
-  Delete as ElIconDelete,
-  SPromotion as ElIconSPromotion,
-} from '@element-plus/icons'
+// import {
+//   Rank as ElIconRank,
+//   Back as ElIconBack,
+//   Plus as ElIconPlus,
+//   Setting as ElIconSetting,
+//   EditOutline as ElIconEditOutline,
+//   Delete as ElIconDelete,
+//   SPromotion as ElIconSPromotion,
+// } from '@element-plus/icons'
 import draggable from 'vuedraggable'
 import {
   getFormGroups,
@@ -275,8 +182,8 @@ export default {
     delGroup(group) {
       this.$confirm(
         '删除分组并不会删除表单，表单将会被转移到 “其他” 分组，确定要删除分组 ' +
-          group.name +
-          '?',
+        group.name +
+        '?',
         '提示',
         {
           confirmButtonText: '确定',
@@ -370,7 +277,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="sass" scoped>
 body{background:#ffffff!important}.undrag{background:#ebecee!important}.from-panel{padding:50px 100px;min-width:500px;background:#ffffff;/deep/ .from-title {
     div {
       float: right;
@@ -476,5 +383,6 @@ body{background:#ffffff!important}.undrag{background:#ebecee!important}.from-pan
     div:nth-child(4) {
       float: right;
     }
-  }}@media screen and (max-width:1000px){.desp{display:none!important}}@media screen and (max-width:800px){.from-panel{padding:50px 10px}}
+  }
+  
 </style>

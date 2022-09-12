@@ -1,17 +1,30 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import { RouterLink, RouterView } from 'vue-router'
 import BaseHeader from './components/layouts/BaseHeader.vue'
 import BaseSide from './components/layouts/BaseSide.vue'
+import zhCn from "element-plus/lib/locale/lang/zh-cn"
+/** 将 Element-Plus 的语言设置为中文 */
+const locale = zhCn
 </script>
 <template>
-  <el-config-provider namespace="ep">
-    <BaseHeader />
-    <div style="display: flex">
-      <BaseSide />
-      <div>
-        <img alt="Vue logo" class="element-plus-logo" src="./assets/logo.png" />
- 		 <RouterView />
-      </div>
+  <el-config-provider namespace="ep" :locale="locale">
+    <div class="common-layout">
+      <el-container>
+        <el-header>
+          <BaseHeader />
+        </el-header>
+        <el-container>
+          <el-aside >
+            <BaseSide />
+          </el-aside>
+          <el-container>
+            <el-main>
+              <RouterView />
+            </el-main>
+            <el-footer>Footer</el-footer>
+          </el-container>
+        </el-container>
+      </el-container>
     </div>
   </el-config-provider>
 </template>

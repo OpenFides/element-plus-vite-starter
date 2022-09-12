@@ -1,5 +1,5 @@
 <template>
-  <el-menu
+  <el-menu v-show="true"
     default-active="2"
     class="el-menu-vertical-demo"
     :collapse="isCollapse"

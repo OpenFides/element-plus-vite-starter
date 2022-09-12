@@ -6,11 +6,6 @@ import {
   ElMessageBox as MessageBox,
   ElMessage as Message,
 } from 'element-plus'
-
-// 第三方插件
-// import 'element-plus/lib/theme-chalk/index.css'
- 
-
 const service = axios.create({
   // baseURL: ,
   timeout: 50000,
@@ -19,9 +14,8 @@ const service = axios.create({
 service.defaults.withCredentials = true // 让ajax携带cookie
 service.interceptors.request.use(
   // 每次请求都自动携带Cookie
-  (config) => {
-    //config.headers.Cookie = document.cookie
-
+  (config:any) => {
+    config.headers.Cookie = document.cookie
     return config
   },
   // eslint-disable-next-line handle-callback-err

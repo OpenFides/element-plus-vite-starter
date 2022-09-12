@@ -1,7 +1,9 @@
 import { createApp } from "vue";
+import type { Directive } from "vue"
+import store from "./store"
+import router from "./router"
+// import "@/router/permission"
 import App from "./App.vue";
-import router from './router'
-import store from './store'
 
 // import "~/styles/element/index.scss";
 
